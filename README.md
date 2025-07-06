@@ -25,11 +25,13 @@ This Python-based web scraper is designed to extract data from a target website 
 ```bash
 git clone https://github.com/yourusername/website-scraper.git
 cd website-scraper
+```
 
 ### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
+```
 
 ### 3. Configure MySQL
 
@@ -40,11 +42,13 @@ DB_CONFIG = {
     'password': 'your_mysql_password',
     'database': 'your_database_name'
 }
+```
 
 ### 4. Run the Scraper
 
 ```bash
 python scraper.py
+```
 
 # 📁 Project Structure
 
@@ -57,6 +61,7 @@ website-scraper/
 ├── utils.py             # (Optional) Utility functions
 ├── requirements.txt     # Python dependencies
 └── README.md            # Project documentation
+```
 
 # 🧪 Example Output
 
@@ -70,6 +75,7 @@ CREATE TABLE scraped_data (
     content TEXT,
     scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+```
 
 # ✅ Best Practices
 
