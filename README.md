@@ -79,18 +79,18 @@ CREATE TABLE scraped_data (
 
 ## ✅ Best Practices
 
-> Avoid scraping sites without permission. Always check the site’s robots.txt.
-> Respect rate limits by adding sleep() between requests.
-> Implement retry logic for robustness.
-> Sanitize and validate all scraped data before storing.
+- Avoid scraping sites without permission. Always check the site’s robots.txt.
+- Respect rate limits by adding sleep() between requests.
+- Implement retry logic for robustness.
+- Sanitize and validate all scraped data before storing.
 
 ## 👨‍💻 Author
 
 ### Rajesh Ranjan
 
-> Email: rajeshranjan8271.com
-> Contact Number: 9999340771
-> GitHub : https://github.com/rajesh-ranjan-git/website-scraper
-> LinkedIn : https://www.linkedin.com/in/rajesh-ranjan-660b1b13a/
+- Email: rajeshranjan8271.com
+- Contact Number: 9999340771
+- GitHub : https://github.com/rajesh-ranjan-git/website-scraper
+- LinkedIn : https://www.linkedin.com/in/rajesh-ranjan-660b1b13a/
 
 We hope you enjoy using Website Scraper!
