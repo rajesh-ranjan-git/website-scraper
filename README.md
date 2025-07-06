@@ -11,8 +11,8 @@ This Python-based web scraper is designed to extract data from a target website 
 
 ## 🛠️ Tech Stack
 
-- **Language:** Python 3.x  
-- **Libraries:** 
+- **Language:** Python 3.x
+- **Libraries:**
   - `requests` (for fetching web pages)
   - `beautifulsoup4` (for parsing HTML)
   - `mysql-connector-python` (for database interaction)
@@ -50,7 +50,7 @@ DB_CONFIG = {
 python scraper.py
 ```
 
-# 📁 Project Structure
+## 📁 Project Structure
 
 ```bash
 website-scraper/
@@ -63,7 +63,7 @@ website-scraper/
 └── README.md            # Project documentation
 ```
 
-# 🧪 Example Output
+## 🧪 Example Output
 
 Scraped data will be inserted into a table like:
 
@@ -77,13 +77,20 @@ CREATE TABLE scraped_data (
 );
 ```
 
-# ✅ Best Practices
+## ✅ Best Practices
 
 > Avoid scraping sites without permission. Always check the site’s robots.txt.
 > Respect rate limits by adding sleep() between requests.
 > Implement retry logic for robustness.
 > Sanitize and validate all scraped data before storing.
 
-# 👨‍💻 Author
-> Rajesh Ranjan
-> GitHub : https://github.com/rajesh-ranjan-git/website-scraper | LinkedIn : https://www.linkedin.com/in/rajesh-ranjan-660b1b13a/
+## 👨‍💻 Author
+
+### Rajesh Ranjan
+
+> Email: rajeshranjan8271.com
+> Contact Number: 9999340771
+> GitHub : https://github.com/rajesh-ranjan-git/website-scraper
+> LinkedIn : https://www.linkedin.com/in/rajesh-ranjan-660b1b13a/
+
+We hope you enjoy using Website Scraper!
