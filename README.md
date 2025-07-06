@@ -2,6 +2,16 @@
 
 This Python-based web scraper is designed to extract data from a target website and store the scraped data in a MySQL database for further analysis or processing.
 
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Setup Instructions](#setup-instructions)
+- [Project Structure](#project-structure)
+- [Example Output](#example-output)
+- [Best Practices](#best-practices)
+- [Author](#author)
+
 ## 🚀 Features
 
 - Scrapes structured data from a website using `requests`, `BeautifulSoup`.
@@ -88,9 +98,9 @@ CREATE TABLE scraped_data (
 
 ### Rajesh Ranjan
 
+[GitHub](https://github.com/rajesh-ranjan-git/website-scraper) | [LinkedIn](https://www.linkedin.com/in/rajesh-ranjan-660b1b13a/)
+
 - Email: rajeshranjan8271.com
 - Contact Number: 9999340771
-- GitHub : https://github.com/rajesh-ranjan-git/website-scraper
-- LinkedIn : https://www.linkedin.com/in/rajesh-ranjan-660b1b13a/
 
 We hope you enjoy using Website Scraper!
