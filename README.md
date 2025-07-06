@@ -2,16 +2,6 @@
 
 This Python-based web scraper is designed to extract data from a target website and store the scraped data in a MySQL database for further analysis or processing.
 
-## Table of Contents
-
-- [🚀 Features](#features)
-- [🛠️ Tech Stack](#🛠️-tech-stack)
-- [📦 Setup Instructions](#📦-setup-instructions)
-- [📁 Project Structure](#📁-project-structure)
-- [🧪 Example Output](#🧪-example-output)
-- [✅ Best Practices](#✅-best-practices)
-- [👨‍💻 Author](#👨‍💻-author)
-
 ## 🚀 Features
 
 - Scrapes structured data from a website using `requests`, `BeautifulSoup`.
