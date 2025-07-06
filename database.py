@@ -1,14 +1,13 @@
 import mysql.connector
 import json
 
-from config import base_config, database_name
+from config import DB_CONFIG
 
 # Insert data to database
 def insert_data_to_db(source_url, text_content, image_urls, link_urls, tables_html):
 
     try:
-        db_config = base_config.copy()
-        db_config["database"] = database_name
+        db_config = DB_CONFIG.copy()
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
 

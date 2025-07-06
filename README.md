@@ -68,13 +68,14 @@ website-scraper/
 Scraped data will be inserted into a table like:
 
 ```bash
-CREATE TABLE scraped_data (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
-    url TEXT,
-    content TEXT,
-    scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+CREATE TABLE IF NOT EXISTS web_scraped_data (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  source_url VARCHAR(2083),
+  text_content TEXT,
+  image_urls LONGTEXT,
+  link_urls LONGTEXT,
+  tables_html LONGTEXT
+)
 ```
 
 ## ✅ Best Practices
