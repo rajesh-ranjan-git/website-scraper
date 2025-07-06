@@ -4,7 +4,7 @@ This Python-based web scraper is designed to extract data from a target website 
 
 ## Table of Contents
 
-- [🚀 Features](#🚀-features)
+- [🚀 Features](#features)
 - [🛠️ Tech Stack](#🛠️-tech-stack)
 - [📦 Setup Instructions](#📦-setup-instructions)
 - [📁 Project Structure](#📁-project-structure)
