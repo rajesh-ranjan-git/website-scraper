@@ -14,9 +14,6 @@ def insert_data_to_db(
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
 
-        conn = mysql.connector.connect(**db_config)
-        cursor = conn.cursor()
-
         # Create table if it doesn't exist
         cursor.execute(
             """
@@ -87,11 +84,12 @@ def insert_data_to_db(
                 ),
             )
 
-        # Commit changes and close connection
-        conn.commit()
+            # Commit changes and close connection
+            conn.commit()
+            print(f"✅ Inserted new record for URL: {source_url}")
+
         cursor.close()
         conn.close()
-        print(f"✅ Inserted new record for URL: {source_url}")
 
     except mysql.connector.Error as err:
         print(f"❌ MySQL Error: {err}")

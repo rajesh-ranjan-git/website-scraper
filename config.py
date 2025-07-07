@@ -23,7 +23,7 @@ try:
     cursor = conn.cursor()
 
     # Create the database if not exists
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_CONFIG.database_name}")
+    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_CONFIG['database']}")
     cursor.close()
     conn.close()
 except mysql.connector.Error as err:
