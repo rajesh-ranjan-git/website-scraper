@@ -48,6 +48,8 @@ def get_link_urls():
     for url in updated_urls:
         print(url)
 
+    print("\n=== Getting Story Link URLs ===")
+
     return updated_urls
 
 
@@ -145,9 +147,7 @@ def get_date_modified(url):
 
 
 # Insert data to database
-def insert_data_to_db(
-    source_url, date_modified, text_content, image_urls, link_urls, tables_html
-):
+def insert_data_to_db(source_url, date_modified):
     base_config = {"host": "localhost", "user": "root", "password": "root"}
     database_name = "web_scraped_data"
 
@@ -197,6 +197,14 @@ def insert_data_to_db(
                     f"⚠️ Skipping: No update needed for URL: {source_url} (dateModified unchanged)"
                 )
             else:
+                # Get parent div to update record
+                parent_div = get_parent_div(url)
+                if parent_div == None:
+                    cursor.close()
+                    conn.close()
+                    print(f"No record to update for URL: {source_url}")
+                    return None
+
                 # Update the record
                 cursor.execute(
                     """
@@ -210,10 +218,10 @@ def insert_data_to_db(
                     """,
                     (
                         date_modified,
-                        text_content,
-                        json.dumps(image_urls),
-                        json.dumps(link_urls),
-                        json.dumps(tables_html),
+                        get_text_content(parent_div),
+                        json.dumps(get_image_urls(parent_div)),
+                        json.dumps(get_links_in_story(parent_div)),
+                        json.dumps(get_tables_html(parent_div)),
                         source_url,
                     ),
                 )
@@ -230,18 +238,19 @@ def insert_data_to_db(
                 (
                     source_url,
                     date_modified,
-                    text_content,
-                    json.dumps(image_urls),
-                    json.dumps(link_urls),
-                    json.dumps(tables_html),
+                    get_text_content(parent_div),
+                    json.dumps(get_image_urls(parent_div)),
+                    json.dumps(get_links_in_story(parent_div)),
+                    json.dumps(get_tables_html(parent_div)),
                 ),
             )
 
-        # Commit changes and close connection
-        conn.commit()
+            # Commit changes and close connection
+            conn.commit()
+            print(f"✅ Inserted new record for URL: {source_url}")
+
         cursor.close()
         conn.close()
-        print(f"✅ Inserted new record for URL: {source_url}")
 
     except mysql.connector.Error as err:
         print(f"❌ MySQL Error: {err}")
@@ -251,17 +260,11 @@ story_link_urls = []
 for url in get_link_urls():
     story_link_urls.extend(get_story_link_urls(url))
 
+
 for url in list(set(story_link_urls)):
-    parent_div = get_parent_div(url)
-    if parent_div == None:
-        continue
     insert_data_to_db(
         url,
         get_date_modified(url),
-        get_text_content(parent_div),
-        get_image_urls(parent_div),
-        get_links_in_story(parent_div),
-        get_tables_html(parent_div),
     )
 
 print("✅ All data inserted to database.")
