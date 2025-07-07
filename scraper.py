@@ -1,8 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
+import extruct
+from w3lib.html import get_base_url
+from dateutil import parser
 
 from utils import clean_text
 from database import insert_data_to_db
+
 
 # Define the URL and headers
 source_url = "https://docs.cleartax.in/cleartax-learn/gst-rates-and-hsn-codes/gst-rates"
@@ -11,6 +15,7 @@ headers = {"User-Agent": "Mozilla/5.0"}
 # Request the page for parent div
 response = requests.get(source_url, headers=headers)
 soup = BeautifulSoup(response.text, "lxml")
+
 
 # Extract all links URLs
 def get_link_urls():
@@ -41,6 +46,7 @@ def get_link_urls():
 
     return updated_urls
 
+
 # Extract all story links URLs
 def get_story_link_urls(source_url):
     story_url_response = requests.get(source_url, headers=headers)
@@ -58,6 +64,7 @@ def get_story_link_urls(source_url):
 
     return story_link_urls
 
+
 # Extract all links in URL
 def get_links_in_story(parent_div):
     links_in_story = parent_div.find_all("a")
@@ -73,6 +80,27 @@ def get_links_in_story(parent_div):
 
     return link_urls_in_story
 
+
+# Get Date Modified
+def get_date_modified(url):
+    response = requests.get(url, headers=headers)
+    base_url = get_base_url(response.text, response.url)
+    data = extruct.extract(response.text, base_url=base_url)
+
+    for item in data.get("json-ld", []):
+        if "dateModified" in item:
+            try:
+                dt = parser.parse(item["dateModified"])
+                return dt.replace(tzinfo=None)
+            except Exception as e:
+                print(
+                    f"⚠️ Failed to parse dateModified: {item} - {item['dateModified']} — {e} for URL : {url}"
+                )
+                return None
+    return None
+
+
+# Get parent div
 def get_parent_div(source_url):
     response = requests.get(source_url, headers=headers)
     soup = BeautifulSoup(response.text, "lxml")
@@ -84,6 +112,7 @@ def get_parent_div(source_url):
 
     parent_div = h1_tag.find_parent()
     return parent_div
+
 
 # Extract all text under this parent div
 def get_text_content(parent_div):
@@ -98,16 +127,19 @@ def get_text_content(parent_div):
     final_text_content = "\n".join(text_content)
     return final_text_content
 
+
 # Extract all image URLs
 def get_image_urls(parent_div):
     images = parent_div.find_all("img")
     image_urls = [img["src"] for img in images if img.get("src")]
     return image_urls
 
+
 # Extract all tables as raw HTML
 def get_tables_html(parent_div):
     tables_html = [str(table) for table in parent_div.find_all("table")]
     return tables_html
+
 
 story_link_urls = []
 for url in get_link_urls():
@@ -115,10 +147,11 @@ for url in get_link_urls():
 
 for url in list(set(story_link_urls)):
     parent_div = get_parent_div(url)
-    if(parent_div == None):
+    if parent_div == None:
         continue
     insert_data_to_db(
         url,
+        get_date_modified(url),
         get_text_content(parent_div),
         get_image_urls(parent_div),
         get_links_in_story(parent_div),
