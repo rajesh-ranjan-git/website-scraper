@@ -94,4 +94,6 @@ CREATE TABLE IF NOT EXISTS web_scraped_data (
 - Email: rajeshranjan8271.com
 - Contact Number: 9999340771
 
+<hr />
+
 We hope you enjoy using Website Scraper!
